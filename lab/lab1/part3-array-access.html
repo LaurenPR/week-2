@@ -74,6 +74,30 @@
     Start code
 
     ===================== */
+    restaurantData = [[39.953233, -75.210288, "Honest Tom's Taco Shop"],
+    [39.94815, -75.21689, "Vietnam Cafe"],
+    [39.954097, -75.20123, "Sweet Green"]]
+
+    // for (var allRestaurants = restaurantData) {
+    //    n = restaurantData.length,
+    //    for (var restaurantIdentifyer = 0, restaurantIdentifyer < n){
+    //      restaruantX = allRestaurants[restaurantIdentifyer]
+    //      for (var i = restaruantX){
+    //        a = i[0]
+    //        b = i[1]
+    //        w = [a,b]
+    //      }
+    //      L.marker(w.addTo(map))
+    //    }
+    // }
+
+    var n = restaurantData.length
+
+    for (var r = 0; r < restaurantData.length; r ++){
+      L.marker([restaurantData[r][0], restaurantData[r][1]]).addTo(map);
+      
+    }
+
 
     L.marker([0, 0]).addTo(map);
     L.marker([0, 0]).addTo(map);
