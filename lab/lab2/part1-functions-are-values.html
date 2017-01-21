@@ -67,7 +67,35 @@
 
       /* Define your function here */
 
-      for (var i = 0; i < theArray.length, i++) { /* Inside the loop*/ }
+      var findYourValue = function(aThing){
+        var exampleSum = 0
+        if (typeof aThing === "string"){
+          exampleSum = aThing.length}
+          else if (typeof aThing === "number"){
+            exampleSum = aThing
+            }
+          else {
+            exampleSum = 0
+          }
+        return exampleSum;
+      }
+
+      var test  = findYourValue(88)
+
+      console.log(test)
+
+      // for (var i = 0; i < theArray.length; i++) {
+      //   var arrayValue = theArray[i];
+      //   if (typeof arrayValue === 'string') {         // String case
+      //     exampleSum = exampleSum + arrayValue.length
+      //   } else if (typeof arrayValue === 'number') {  // Number case
+      //     exampleSum = exampleSum + arrayValue
+      //   } else {                                      // Otherwise
+      //     console.log("Not sure how to proceed with value:", arrayValue)
+      //   }
+      // }
+
+      // for (var i = 0; i < theArray.length, i++) { /* Inside the loop*/ }
 
       /* =====================
 
