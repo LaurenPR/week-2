@@ -78,6 +78,33 @@ only those that have length of 4
 newarray.push(newSubarray)
 
 
+
+var toNum = function(thing) {
+    if (typeof(thing) == "object") {
+      return thing;
+    } if(isNaN(parseFloat(thing))) {
+      return thing;
+    } else {
+        return parseFloat(thing);
+    }
+};
+
+var newArr = [];
+
+  for (i=0;  i < bikeArrayDirty.length; i++) {
+      if(bikeArrayDirty[i].length == 4 && toNum(bikeArrayDirty[i][3].split(" ")[0]) >= 20 && typeof toNum(bikeArrayDirty[i][2]) == "string") {
+        var newSub = [];
+      // for (j = 0; j < bikeArrayDirty[i].length; j++) {
+      //   if(j == 3) {
+      //     console.log(toNum(bikeArrayDirty[i][j].split(" ")[0]));
+        newSub[0] = toNum(bikeArrayDirty[i][0]);
+        newSub[1] = toNum(bikeArrayDirty[i][1]);
+        newSub[2] = toNum(bikeArrayDirty[i][2]);
+        newSub[3] = toNum(bikeArrayDirty[i][3]);
+        newArr.push(newSub);
+      }
+      }
+
     /* =====================
 
     End code to filter data

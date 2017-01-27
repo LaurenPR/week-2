@@ -20,7 +20,7 @@
     <script>
       var map = L.map('map', {
         center: [39.9522, -75.1639],
-        zoom: 13
+        zoom: 12
       });
       var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
 	      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -94,24 +94,39 @@ produces something that is undefined. Googling my error: "TypeError: Cannot read
 with partial answers, but I think I might be missing something fundamental here.)
 */
 
-      var keysArray = Object.keys(healthCenters[0]); // finds the keys for the first item in the array
-      console.log(keysArray); //prints array of keys
 
-      var newHealthCare = []
+// NEW  newSub[0] = healthCenters [keysArray[0]];
+
+
+      var keysArray = Object.keys(healthCenters[0]); // finds the keys for the first item in the array
+      // console.log(keysArray); //prints array of keys
+
+      var newHealthCare = [] // empty array to fill
+
+
+
 
       var itemsFunction = function(object){
-        for (r = 0; r < keysArray.length; r++){
           var newSub = [];
-            newSub[r] = this.keysArray[r];
-            newHealthCare.push(newSub);
-        };
+          if(object["ZIP"] >= 19140 && object["ZIP"] <= 19149){
+            for (r = 0; r < keysArray.length; r++){
+              newSub[r] = object[keysArray[r]];
+            };
+          };
+           if (newSub.length>0){ //sets a condition where only vectors that have a length > than 0 get added, otherwise you end up with lots of empty vectors and it gives a weird error
+             newHealthCare.push(newSub); //adds the sub-vector to the new HealthCare array
+            //  console.log(newSub) //just for testing purposes
+           }
+           //console.log(newHealthCare);
       };
 
-      for (i = 0; i<healthCenters.length; i++){
-        itemsFunction(healthCenters[i])
-      }
 
-      console.log(newHealthCare);
+      for (ii = 0; ii <healthCenters.length;ii++){
+            itemsFunction(healthCenters[ii]);
+      };
+
+      // console.log(newHealthCare)
+
 
       var finalVector = [keysArray, newHealthCare]
 
@@ -120,13 +135,16 @@ with partial answers, but I think I might be missing something fundamental here.
 
       //var jsonToCsv = function(json) { console.log(json); };
 
-
-      var addMarkers = function(map) {
-        for (var m = 0; m < map.length; m ++){
-          L.marker([map[r][0], map[r][1]]).addTo(map).
-          bindPopup(map[r][3]);
+//
+      var addMarkers = function(thing) {
+        for (var m = 0; m < thing.length; m ++){
+          L.marker([thing[m][1], thing[m][0]]).addTo(map).
+          bindPopup(thing[m][3]);
         };
       };
+
+      addMarkers(finalVector[1])
+
       // note: for the ^^ addMarkers function to run the input would need to be finalVector[1]
       /* =====================
 
@@ -135,7 +153,7 @@ with partial answers, but I think I might be missing something fundamental here.
       ===================== */
 
 
-      jsonToCsv(healthCenters);
+      //jsonToCsv(healthCenters);
       addMarkers(map);
     </script>
     <!--Your code ends here-->
