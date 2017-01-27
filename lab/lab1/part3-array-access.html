@@ -57,7 +57,7 @@
     ===================== */
 
     var map = L.map('map', {
-      center: [39.9522, -75.1639],
+      center: [39.94815, -75.21689],
       zoom: 14
     });
 
@@ -74,11 +74,13 @@
     Start code
 
     ===================== */
-    restaurantData = [[39.953233, -75.210288, "Honest Tom's Taco Shop"],
-    [39.94815, -75.21689, "Vietnam Cafe"],
-    [39.954097, -75.20123, "Sweet Green"]]
+    restaurantData = [
+      [39.953233, -75.210288, 'Honest Toms Taco Shop'],
+      [39.94815, -75.21689, 'Vietnam Cafe'],
+      [39.954097, -75.20123, 'Sweet Green']]
 
-    // for (var allRestaurants = restaurantData) {
+    // OLD code:
+    //    for (var allRestaurants = restaurantData) {
     //    n = restaurantData.length,
     //    for (var restaurantIdentifyer = 0, restaurantIdentifyer < n){
     //      restaruantX = allRestaurants[restaurantIdentifyer]
@@ -93,15 +95,14 @@
 
     var n = restaurantData.length
 
-    for (var r = 0; r < restaurantData.length; r ++){
-      L.marker([restaurantData[r][0], restaurantData[r][1]]).addTo(map);
-      
-    }
+    for (var r = 0; r < n; r ++){
+      L.marker([restaurantData[r][0], restaurantData[r][1]]).addTo(map).
+      bindPopup(restaurantData[r][2]);
+    };
 
-
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    // L.marker([0, 0]).addTo(map);
+    // L.marker([0, 0]).addTo(map);
+    // L.marker([0, 0]).addTo(map);
 
     /* =====================
 

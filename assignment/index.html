@@ -20,9 +20,9 @@
     <script>
       var map = L.map('map', {
         center: [39.9522, -75.1639],
-        zoom: 14
+        zoom: 13
       });
-      var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+      var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
 	      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       	subdomains: 'abcd',
       	minZoom: 0,
@@ -55,11 +55,79 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+    // End Goal: [
+    //   ["DENTAL_PHONE", "FULL_ADDRESS", etc.],
+    //   [["N/A", "251 East Bringhurst Street", etc.], [etc.]]
+    // ]
 
 
-      var addMarkers = function(map) {};
 
+      // for (i = 0; r <= healthCenters[0].length; i++){
+        // var sub = [];
+        // sub[i] =
+
+      //for (r = 0; r >= healthCenters.length; r++){}
+
+
+
+
+      /*
+      var newSub = [];
+        var subTest = healthCenters[0].keysArray[0];
+        console.log(subTest);
+        newSub[1] = healthCenters[0].keysArray[1];
+        newSub[2] = healthCenters[0].keysArray[2];
+        newSub[3] = healthCenters[0].keysArray[3];
+        newSub[4] = healthCenters[0].keysArray[4];
+      newHealthCare.push(newSub)
+
+      };
+
+
+      */
+
+/* This code doens't actually work :( It instead produces a long list of iterated keys, however, I feel I am getting quite
+close and will be atttending office hours tomorrow for more assistance.
+Right now I am very stuck on the fact that typing a healthCenters[0] OR keysArray[0] in the console.log both produce
+expected results, and even writing healthCenters[0].LNG - or using any the other keys, also works; but when I try to healthCenters[0].keysArray[0]
+produces something that is undefined. Googling my error: "TypeError: Cannot read property '0' of undefined" has left me
+with partial answers, but I think I might be missing something fundamental here.)
+*/
+
+      var keysArray = Object.keys(healthCenters[0]); // finds the keys for the first item in the array
+      console.log(keysArray); //prints array of keys
+
+      var newHealthCare = []
+
+      var itemsFunction = function(object){
+        for (r = 0; r < keysArray.length; r++){
+          var newSub = [];
+            newSub[r] = this.keysArray[r];
+            newHealthCare.push(newSub);
+        };
+      };
+
+      for (i = 0; i<healthCenters.length; i++){
+        itemsFunction(healthCenters[i])
+      }
+
+      console.log(newHealthCare);
+
+      var finalVector = [keysArray, newHealthCare]
+
+      console.log(finalVector);
+
+
+      //var jsonToCsv = function(json) { console.log(json); };
+
+
+      var addMarkers = function(map) {
+        for (var m = 0; m < map.length; m ++){
+          L.marker([map[r][0], map[r][1]]).addTo(map).
+          bindPopup(map[r][3]);
+        };
+      };
+      // note: for the ^^ addMarkers function to run the input would need to be finalVector[1]
       /* =====================
 
       End code
